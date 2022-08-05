@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>websocket</title>
+</head>
+<body>
+    <div>
+        未读消息数：<span id="sp" style="color: red"></span>
+    </div>
+
+    <script type="application/javascript">
+        let webSocket = new WebSocket("ws://localhost:8080/ws");
+        webSocket.onopen = function (){
+            console.log("webSocket连接打开了...");
+        }
+        webSocket.onclose = function (){
+            console.log("webSocket连接关闭了...");
+        }
+        webSocket.onerror = function (){
+            console.log("webSocket连接出错了...");
+        }
+        webSocket.onmessage = function (event){
+            let data = JSON.parse(event.data);
+            document.getElementById("sp").innerText = data.length;
+        }
+    </script>
+</body>
+</html>
